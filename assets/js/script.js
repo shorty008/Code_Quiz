@@ -2,7 +2,7 @@
 var body = document.body;
 var questionEl = document.getElementById('questions');
 var finalScoreEl = document.getElementById('final-score');
-var done = document.getElementById('quizComplete');
+var quizCompleteEl = document.getElementById('quizComplete');
 var formEl = document.getElementById('initial-form');
 var btnEl = document.getElementsByClassName('btn');
 var infoEl = document.querySelector("#intro");
@@ -54,7 +54,7 @@ var timer = function(){
         }
         else if (timeOnTmer <= 0){
             endquiz();
-            rightOrWrongEl.remove();
+            solutionEl.remove();
 
             firstAnswerOne.remove();
             firstAnswerTwo.remove();
@@ -84,9 +84,19 @@ var timer = function(){
         timerEl.textContent = 'Time: 0';   
 
         }
-    }, 
-    1000);
-    }
+    }, 1000);
+}
+
+var timerStop = function() {
+    clearInterval(timeInterval);
+    timerEl.textContent = "Time: " + timeOnTimer;   
+};
+
+var penelityDeduction = function(){
+    clearInterval(timeInterval);
+    timeOnTimer = timeOnTimer - penelty;
+    timer();
+} 
 
 // Question 1 Commonly used data tyoes Do NOT include:
 
@@ -98,6 +108,7 @@ var firstQuestion = function() {
     document.body.appendChild(firstAnswerOne);
     firstAnswerOne.addEventListener("click", function(){
         rightAnswer = false;
+        penelityDeduction();
         secondQuestion();
         firstAnswerOne.remove();
         firstAnswerTwo.remove();
@@ -111,6 +122,7 @@ var firstQuestion = function() {
     document.body.appendChild(firstAnswerTwo);
     firstAnswerTwo.addEventListener("click", function(){
         rightAnswer = false;
+        penelityDeduction();
         secondQuestion();
         firstAnswerOne.remove();
         firstAnswerTwo.remove();
@@ -137,6 +149,7 @@ var firstQuestion = function() {
     document.body.appendChild(firstAnswerFour);
     firstAnswerFour.addEventListener("click", function() {
         rightAnswer = false;
+        penelityDeduction();
         secondQuestion();
         firstAnswerOne.remove();
         firstAnswerTwo.remove();
@@ -156,6 +169,7 @@ var secondQuestion = function() {
     document.body.appendChild(secondAnswerOne);
     secondAnswerOne.addEventListener("click", function() {
         rightAnswer = false;
+        penelityDeduction();
         thirdQuestion();
         secondAnswerOne.remove();
         secondAnswerTwo.remove();
@@ -169,6 +183,7 @@ var secondQuestion = function() {
     document.body.appendChild(secondAnswerTwo);
     secondAnswerTwo.addEventListener("click", function() {
         rightAnswer = false;
+        penelityDeduction();
         thirdQuestion();
         secondAnswerOne.remove();
         secondAnswerTwo.remove();
@@ -195,6 +210,7 @@ var secondQuestion = function() {
     document.body.appendChild(secondAnswerFour);
     secondAnswerFour.addEventListener("click", function() {
         rightAnswer = false;
+        penelityDeduction();
         thirdQuestion();
         secondAnswerOne.remove();
         secondAnswerTwo.remove();
@@ -214,6 +230,7 @@ var thirdQuestion = function() {
     document.body.appendChild(thirdAnswerOne);
     thirdAnswerOne.addEventListener("click", function() {
         rightAnswer = false;
+        penelityDeduction();
         fourthQuestion();
         thirdAnswerOne.remove();
         thirdAnswerTwo.remove();
@@ -227,6 +244,7 @@ var thirdQuestion = function() {
     document.body.appendChild(thirdAnswerTwo);
     thirdAnswerTwo.addEventListener("click", function() {
         rightAnswer = false;
+        penelityDeduction();
         fourthQuestion();
         thirdAnswerOne.remove();
         thirdAnswerTwo.remove();
@@ -240,6 +258,7 @@ var thirdQuestion = function() {
     document.body.appendChild(thirdAnswerThree);
     thirdAnswerThree.addEventListener("click", function() {
         rightAnswer = false;
+        penelityDeduction();
         fourthQuestion();
         thirdAnswerOne.remove();
         thirdAnswerTwo.remove();
@@ -273,6 +292,7 @@ var fourthQuestion = function() {
     document.body.appendChild(fourthAnswerOne);
     fourthAnswerOne.addEventListener("click", function() {
         rightAnswer = false;
+        penelityDeduction();
         fifthQuestion();
         fourthAnswerOne.remove();
         fourthAnswerTwo.remove();
@@ -286,6 +306,7 @@ var fourthQuestion = function() {
     document.body.appendChild(fourthAnswerTwo);
     fourthAnswerTwo.addEventListener("click", function() {
         rightAnswer = false;
+        penelityDeduction();
         fifthQuestion();
         fourthAnswerOne.remove();
         fourthAnswerTwo.remove();
@@ -312,6 +333,7 @@ var fourthQuestion = function() {
     document.body.appendChild(fourthAnswerFour);
     fourthAnswerFour.addEventListener("click", function() {
         rightAnswer = false;
+        penelityDeduction();
         fifthQuestion();
         fourthAnswerOne.remove();
         fourthAnswerTwo.remove();
@@ -333,12 +355,13 @@ var fifthQuestion = function() {
     document.body.appendChild(fifthAnswerOne);
     fifthAnswerOne.addEventListener("click", function() {
         rightAnswer = false;
+        penelityDeduction();
         quizOver();
         fifthAnswerOne.remove();
         fifthAnswerTwo.remove();
         fifthAnswerThree.remove();
         fifthAnswerFour.remove();
-        rightOrWrongEl.remove();
+        solutionEl.remove();
         return rightAnswer;
     });
 
@@ -347,12 +370,13 @@ var fifthQuestion = function() {
     document.body.appendChild(fifthAnswerTwo);
     fifthAnswerTwo.addEventListener("click", function() {
         rightAnswer = false;
+        penelityDeduction();
         quizOver();
         fifthAnswerOne.remove();
         fifthAnswerTwo.remove();
         fifthAnswerThree.remove();
         fifthAnswerFour.remove();
-        rightOrWrongEl.remove();
+        solutionEl.remove();
         return rightAnswer;
     });
 
@@ -361,12 +385,13 @@ var fifthQuestion = function() {
     document.body.appendChild(fifthAnswerThree);
     fifthAnswerThree.addEventListener("click", function() {
         rightAnswer = false;
+        penelityDeduction();
         quizOver();
         fifthAnswerOne.remove();
         fifthAnswerTwo.remove();
         fifthAnswerThree.remove();
         fifthAnswerFour.remove();
-        rightOrWrongEl.remove();
+        solutionEl.remove();
         return rightAnswer;
     });
 
@@ -380,7 +405,7 @@ var fifthQuestion = function() {
         fifthAnswerTwo.remove();
         fifthAnswerThree.remove();
         fifthAnswerFour.remove();
-        rightOrWrongEl.remove();
+        solutionEl.remove();
         return rightAnswer;
     });
 
@@ -395,23 +420,18 @@ var quizOver = function(){
     fifthAnswerTwo.remove();
     fifthAnswerThree.remove();
     fifthAnswerFour.remove();
-    rightOrWrongEl.remove();
+    timerStop();
     questionEl.textContent = 'All done!';
-
+    finalScoreEl.textContent = 'Your final score is ' + timeOnTimer;
+    formEl.style.display = 'flex';
+    validateForm();
 };
 
+var inputInitials= document.getElementById("initials");
+var validateForm = function() {
 
-//display if the question is answered correctly or not
-var rightOrWrongEl = document.createElement("h3");
-var answerResponse = function(){
-    rightOrWrongEl.id = 'right-wrong'
-
-    if (correctAnswer === true){
-        rightOrWrongEl.textContent = "Correct!"
-        document.body.appendChild(rightOrWrongEl);
+    if (inputInitials == null) {
+      alert("Initials must be filled out");
+      return false;
     }
-    else if (correctAnswer === false) {
-        rightOrWrongEl.textContent = "Wrong!"
-        document.body.appendChild(rightOrWrongEl);
-    }    
-};
+  };
