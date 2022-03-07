@@ -7,6 +7,10 @@ var formEl = document.getElementById('initial-form');
 var btnEl = document.getElementsByClassName('btn');
 var infoEl = document.querySelector("#intro");
 var startQuizEl = document.querySelector('#start-quiz');
+var timerEl = document.getElementById('timer')
+var timeOnTimer = 75;
+var stopTime = 0;
+var penelty = 10;
 
 var firstAnswerOne = document.createElement("button");
 var firstAnswerTwo = document.createElement("button");
@@ -36,8 +40,53 @@ var fifthAnswerFour = document.createElement("button");
 //Start Quiz Button
 startQuizEl.addEventListener("click", function(){
     infoEl.style.display = 'none';
+    timer();
     firstQuestion();
 });
+
+//Timer
+var timeInterval = setInterval(function(){});
+var timer = function(){
+    timeInterval = setInterval(function(){
+        if (timeOnTimer > 0){
+            timerEl.textContent = 'Time: ' + timeOnTimer;
+            timeOnTimer --;
+        }
+        else if (timeOnTmer <= 0){
+            endquiz();
+            rightOrWrongEl.remove();
+
+            firstAnswerOne.remove();
+            firstAnswerTwo.remove();
+            firstAnswerThree.remove();
+            firstAnswerFour.remove();
+
+            secondAnswerOne.remove();
+            secondAnswerTwo.remove();
+            secondAnswerThree.remove();
+            secondAnswerFour.remove();
+        
+            thirdAnswerOne.remove();
+            thirdAnswerTwo.remove();
+            thirdAnswerThree.remove();
+            thirdAnswerFour.remove();        
+
+            fourthAnswerOne.remove();
+            fourthAnswerTwo.remove();
+            fourthAnswerThree.remove();
+            fourthAnswerFour.remove();
+
+            fifthAnswerOne.remove();
+            fifthAnswerTwo.remove();
+            fifthAnswerThree.remove();
+            fifthAnswerFour.remove();
+
+        timerEl.textContent = 'Time: 0';   
+
+        }
+    }, 
+    1000);
+    }
 
 // Question 1 Commonly used data tyoes Do NOT include:
 
@@ -289,6 +338,7 @@ var fifthQuestion = function() {
         fifthAnswerTwo.remove();
         fifthAnswerThree.remove();
         fifthAnswerFour.remove();
+        rightOrWrongEl.remove();
         return rightAnswer;
     });
 
@@ -302,6 +352,7 @@ var fifthQuestion = function() {
         fifthAnswerTwo.remove();
         fifthAnswerThree.remove();
         fifthAnswerFour.remove();
+        rightOrWrongEl.remove();
         return rightAnswer;
     });
 
@@ -315,6 +366,7 @@ var fifthQuestion = function() {
         fifthAnswerTwo.remove();
         fifthAnswerThree.remove();
         fifthAnswerFour.remove();
+        rightOrWrongEl.remove();
         return rightAnswer;
     });
 
@@ -328,6 +380,7 @@ var fifthQuestion = function() {
         fifthAnswerTwo.remove();
         fifthAnswerThree.remove();
         fifthAnswerFour.remove();
+        rightOrWrongEl.remove();
         return rightAnswer;
     });
 
