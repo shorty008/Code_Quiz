@@ -13,5 +13,5 @@ https://shorty008.github.io/Code_Quiz/
 
 ## Image
 
-![quiz](./assets/images/Quiz.png)
+![quiz](/assets/images/Quiz.png)
 
